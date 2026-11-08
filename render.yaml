@@ -5,6 +5,8 @@ services:
     name: portfolio-chat
     runtime: docker
     plan: free
+    # 한국에서 가장 가까운 리전 (기본값은 미국 오리건)
+    region: singapore
     # content/ 를 지식원으로 함께 넣어야 하므로 빌드 컨텍스트는 레포 루트
     dockerfilePath: ./server/Dockerfile
     dockerContext: .
