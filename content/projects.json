@@ -1,23 +1,38 @@
 [
   {
     "slug": "postnet-pda",
-    "title": "우편물류시스템 · 집배원 PDA 유지보수",
-    "summary": "우정정보관리원 국가 우편물류시스템(PostNet)과 집배원 PDA 앱을 유지보수·고도화하고 있습니다. 전자정부프레임워크 기반 백엔드 로직과 eXbuilder6 관리 화면, PDA 연동 RESTful API, Oracle·MyBatis 기반 대용량 우편물류 데이터 처리와 배치를 담당합니다. 공공 시스템의 클라우드 전환에 따른 아키텍처 분석과 인프라 연동 검토에도 참여했습니다.",
-    "role": "백엔드 유지보수 개발 · (주)소프트아이텍 SM우편물류 PDA팀",
+    "title": "우편물류시스템(PostNet) · 집배원 PDA",
+    "featured": true,
+    "summary": "우정정보관리원의 국가 우편물류시스템(PostNet) 개발·유지보수와 집배원 PDA 모바일 앱 유지보수·고도화를 맡고 있습니다. 화면(웹·PDA 앱) – 서버 – Oracle 공통 DB로 이어지는 3-Tier 구조의 대규모 공공 시스템입니다.",
+    "highlights": [
+      "규모: 같은 부서에만 개발자가 40~50명, 테이블이 6,000개가 넘는 우체국 우편물류 시스템입니다.",
+      "PostNet(웹): eXbuilder6 전용 Submission 프로토콜로 .clx·.js 화면의 DataCollection 데이터를 서버와 비동기로 주고받습니다.",
+      "PDA 앱: MDM(집배·발착 앱 배포 스토어), 집배소포 앱, 발착관리 앱. 안드로이드 Native Activity 안의 WebView에서 eXMobile 화면을 렌더링하고, 플러그인·OEM 모듈로 Java 코드를 실행해 바코드 등 단말 하드웨어 데이터를 읽는 하이브리드 구조입니다. 저는 화면(JS)과 서버 연동을 담당하고, 네이티브 플러그인은 팀 선임이 관리합니다.",
+      "서버 연동: 전략 패턴(Strategy Pattern) 기반 사내 공통 인터페이스 모듈로 Header·Body·Loop 구조의 순수 JSON 요청/응답을 처리합니다.",
+      "데이터: Oracle 공통 DB를 MyBatis로 다루며, 대용량 우편물류 데이터 처리와 배치를 유지보수합니다.",
+      "G-클라우드 전환: 레거시 서버를 G-클라우드로 옮기는 과정에서 WAS 버전 업그레이드와 클라우드 MDM 앱 전환에 따른 기능 검증(테스트)에 참여했습니다."
+    ],
+    "role": "PostNet 개발·유지보수, PDA 앱 유지보수 · (주)소프트아이텍 SM우편물류 PDA팀",
     "period": "2026.01 – 현재",
     "stack": [
       "Java",
       "Spring(전자정부)",
-      "Oracle",
       "MyBatis",
+      "Oracle",
       "eXbuilder6",
-      "JEUS",
+      "eXMobile",
       "Android 하이브리드",
+      "JEUS",
+      "Tomcat",
       "SVN"
     ],
     "metrics": [],
-    "draft": true,
-    "links": []
+    "links": [],
+    "note": "공공기관 폐쇄망(내부망) 환경의 업무라 소스 코드를 공개할 수 없어요.",
+    "reflection": "가장 기억에 남는 프로젝트입니다. 시스템이 워낙 거대하고 복잡해서 처음에는 전체 구조를 파악하는 것부터 쉽지 않았습니다. 그동안 화면과 서버 코드만 보던 시야에서, G-클라우드 전환을 가까이에서 지켜보며 서버·네트워크·배포 같은 인프라가 서비스 전체의 안정성을 좌우한다는 것을 크게 깨달았습니다. 솔직히 인프라는 아직 잘 모르고 배우는 중이지만, 이 경험 덕분에 코드뿐 아니라 인프라와 운영까지 이해하는 백엔드 개발자가 되겠다는 목표가 생겼습니다.",
+    "visual": {
+      "type": "architecture"
+    }
   },
   {
     "slug": "electerior-saferroad",
@@ -27,7 +42,6 @@
     "period": "2025.08 – 2025.10",
     "stack": ["NestJS", "Angular", "Prisma", "PostgreSQL", "Docker", "NX Monorepo", "TailwindCSS"],
     "metrics": [],
-    "draft": true,
     "links": [
       {
         "label": "Electerior",
@@ -37,7 +51,22 @@
         "label": "SaferRoad",
         "url": "https://github.com/maengHoonPark/saferroad"
       }
-    ]
+    ],
+    "visual": {
+      "type": "duo",
+      "images": [
+        {
+          "src": "/images/electerior.png",
+          "alt": "Electerior 회사 홈페이지 첫 화면",
+          "label": "electerior.com"
+        },
+        {
+          "src": "/images/saferroad.png",
+          "alt": "SaferRoad 서비스 홈페이지 첫 화면",
+          "label": "saferroad.co.kr"
+        }
+      ]
+    }
   },
   {
     "slug": "jobis",
@@ -47,13 +76,17 @@
     "period": "2025.04 – 2025.05",
     "stack": ["FastAPI", "LangChain", "ChromaDB", "PostgreSQL", "React"],
     "metrics": [],
-    "draft": true,
     "links": [
       {
-        "label": "GitHub (팀)",
-        "url": "https://github.com/2024-SMHRD-DCX-BigData-16/J.O.B.I.S."
+        "label": "GitHub",
+        "url": "https://github.com/maengHoonPark/JOBIS"
       }
-    ]
+    ],
+    "visual": {
+      "type": "image",
+      "src": "/images/jobis.png",
+      "alt": "J.O.B.I.S AI 면접 화면"
+    }
   },
   {
     "slug": "center",
@@ -63,12 +96,16 @@
     "period": "2025.02 – 2025.03",
     "stack": ["Spring MVC", "MySQL", "Tomcat", "JSP", "JavaScript", "OpenAI API"],
     "metrics": [],
-    "draft": true,
     "links": [
       {
         "label": "GitHub",
         "url": "https://github.com/maengHoonPark/CEnter"
       }
-    ]
+    ],
+    "visual": {
+      "type": "image",
+      "src": "/images/center.png",
+      "alt": "CEnter 코딩 문제 풀이 화면"
+    }
   }
 ]

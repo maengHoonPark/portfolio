@@ -1,18 +1,12 @@
 [
   {
     "name": "Language",
-    "items": ["Java", "Python", "JavaScript", "TypeScript", "SQL"]
+    "items": ["Java", "Python", "JavaScript", "TypeScript", "SQL"],
+    "main": "Java"
   },
   {
     "name": "Backend",
-    "items": [
-      "Spring / Spring Boot",
-      "전자정부프레임워크",
-      "MyBatis",
-      "NestJS",
-      "Prisma",
-      "FastAPI"
-    ]
+    "items": ["Spring / Spring Boot", "전자정부프레임워크", "MyBatis", "NestJS", "Prisma"]
   },
   {
     "name": "Database / Server",
@@ -20,14 +14,18 @@
   },
   {
     "name": "Frontend",
-    "items": ["eXbuilder6", "Angular", "JSP / Thymeleaf", "TailwindCSS"]
+    "items": ["eXbuilder6", "eXMobile", "Angular", "TailwindCSS"]
   },
   {
     "name": "AI",
-    "items": ["LangChain", "OpenAI API", "Embedding", "Pandas / NumPy"]
+    "items": ["LangChain", "Embedding", "Pandas / NumPy"]
   },
   {
     "name": "Tooling / DevOps",
     "items": ["Git / GitHub", "SVN", "Docker", "NX Monorepo"]
+  },
+  {
+    "name": "Certificate",
+    "items": ["정보처리기사 (2025.09)"]
   }
 ]
