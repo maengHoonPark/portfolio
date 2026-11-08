@@ -1,0 +1,74 @@
+[
+  {
+    "slug": "postnet-pda",
+    "title": "우편물류시스템 · 집배원 PDA 유지보수",
+    "summary": "우정정보관리원 국가 우편물류시스템(PostNet)과 집배원 PDA 앱을 유지보수·고도화하고 있습니다. 전자정부프레임워크 기반 백엔드 로직과 eXbuilder6 관리 화면, PDA 연동 RESTful API, Oracle·MyBatis 기반 대용량 우편물류 데이터 처리와 배치를 담당합니다. 공공 시스템의 클라우드 전환에 따른 아키텍처 분석과 인프라 연동 검토에도 참여했습니다.",
+    "role": "백엔드 유지보수 개발 · (주)소프트아이텍 SM우편물류 PDA팀",
+    "period": "2026.01 – 현재",
+    "stack": [
+      "Java",
+      "Spring(전자정부)",
+      "Oracle",
+      "MyBatis",
+      "eXbuilder6",
+      "JEUS",
+      "Android 하이브리드",
+      "SVN"
+    ],
+    "metrics": [],
+    "draft": true,
+    "links": []
+  },
+  {
+    "slug": "electerior-saferroad",
+    "title": "Electerior · SaferRoad",
+    "summary": "레피소드에서 회사 공식 홈페이지(Electerior)와 공사 현장 관리 플랫폼(SaferRoad)을 개발했습니다. 회원가입, 로그인, OAuth 등 인증/인가를 직접 설계·구현하고, Prisma로 User·Role·WorkSite 관계를 모델링해 CRUD API를 만들었습니다. FastAPI + LangChain + Chroma 기반 사내 챗봇 개발도 보조했습니다.",
+    "role": "풀스택 개발 · ERD 설계 (인턴)",
+    "period": "2025.08 – 2025.10",
+    "stack": ["NestJS", "Angular", "Prisma", "PostgreSQL", "Docker", "NX Monorepo", "TailwindCSS"],
+    "metrics": [],
+    "draft": true,
+    "links": [
+      {
+        "label": "Electerior",
+        "url": "https://github.com/maengHoonPark/electerior"
+      },
+      {
+        "label": "SaferRoad",
+        "url": "https://github.com/maengHoonPark/saferroad"
+      }
+    ]
+  },
+  {
+    "slug": "jobis",
+    "title": "J.O.B.I.S",
+    "summary": "취업 준비생의 자소서를 분석해 AI 면접, 꼬리질문, 회사·멘토 추천을 제공하는 커리어 어시스턴트. 처음 쓰는 FastAPI와 ChromaDB로 PDF 파싱, 임베딩, 유사도 검색, 꼬리질문 생성까지 백엔드 전체 흐름을 구성했습니다.",
+    "role": "머신러닝 · 백엔드 전체 (팀 프로젝트)",
+    "period": "2025.04 – 2025.05",
+    "stack": ["FastAPI", "LangChain", "ChromaDB", "PostgreSQL", "React"],
+    "metrics": [],
+    "draft": true,
+    "links": [
+      {
+        "label": "GitHub (팀)",
+        "url": "https://github.com/2024-SMHRD-DCX-BigData-16/J.O.B.I.S."
+      }
+    ]
+  },
+  {
+    "slug": "center",
+    "title": "CEnter",
+    "summary": "언어와 주제를 고르면 GPT API로 코딩 문제를 생성하고, 풀이와 힌트로 학습하는 AI 코딩 학습 도우미. Spring MVC로 문제 생성 기능을 구현하고, JavaScript 비동기 통신으로 OpenAI API를 연동해 JSP 화면에 렌더링했습니다.",
+    "role": "백엔드 · DB 구축 전체 (팀 프로젝트)",
+    "period": "2025.02 – 2025.03",
+    "stack": ["Spring MVC", "MySQL", "Tomcat", "JSP", "JavaScript", "OpenAI API"],
+    "metrics": [],
+    "draft": true,
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/maengHoonPark/CEnter"
+      }
+    ]
+  }
+]

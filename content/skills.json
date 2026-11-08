@@ -1,0 +1,33 @@
+[
+  {
+    "name": "Language",
+    "items": ["Java", "Python", "JavaScript", "TypeScript", "SQL"]
+  },
+  {
+    "name": "Backend",
+    "items": [
+      "Spring / Spring Boot",
+      "전자정부프레임워크",
+      "MyBatis",
+      "NestJS",
+      "Prisma",
+      "FastAPI"
+    ]
+  },
+  {
+    "name": "Database / Server",
+    "items": ["Oracle", "PostgreSQL", "MySQL", "ChromaDB", "JEUS", "Tomcat"]
+  },
+  {
+    "name": "Frontend",
+    "items": ["eXbuilder6", "Angular", "JSP / Thymeleaf", "TailwindCSS"]
+  },
+  {
+    "name": "AI",
+    "items": ["LangChain", "OpenAI API", "Embedding", "Pandas / NumPy"]
+  },
+  {
+    "name": "Tooling / DevOps",
+    "items": ["Git / GitHub", "SVN", "Docker", "NX Monorepo"]
+  }
+]

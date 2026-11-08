@@ -1,0 +1,51 @@
+[
+  {
+    "type": "경력",
+    "title": "사원 · SM우편물류 PDA팀 (재직 중)",
+    "org": "(주)소프트아이텍 · 고객사 우정정보관리원",
+    "period": "2026.01 – 현재",
+    "description": "우정정보관리원에서 국가 우편물류시스템(PostNet)과 집배원 PDA 앱을 유지보수합니다. Java/Spring 백엔드, eXbuilder6 화면, PDA 연동 API, Oracle·MyBatis 데이터 처리와 배치를 담당하고, 폐쇄망 환경의 서버 구축·배포 프로세스를 다룹니다."
+  },
+  {
+    "type": "인턴",
+    "title": "풀스택 개발 인턴",
+    "org": "레피소드 주식회사",
+    "period": "2025.08 – 2025.10",
+    "description": "Angular, NestJS, Prisma, PostgreSQL, Docker, NX 환경에서 SaferRoad·Electerior를 개발했습니다. 인증/인가 설계, ERD와 CRUD API, Git 브랜치 기반 협업과 코드 리뷰를 경험했습니다."
+  },
+  {
+    "type": "자격",
+    "title": "정보처리기사",
+    "org": "한국산업인력공단",
+    "period": "2025.09",
+    "description": "국가기술자격 취득"
+  },
+  {
+    "type": "교육",
+    "title": "DCX 기반 빅데이터 분석서비스 개발자 심화 과정 (960시간)",
+    "org": "스마트인재개발원 · K-Digital Training",
+    "period": "2024.11 – 2025.05",
+    "description": "Java, Spring/Spring Boot, MyBatis, Oracle 등 SI 웹 기술과 Python 데이터 분석, LangChain 기반 AI 서비스를 학습했고, ML 엔지니어 멘토의 피드백을 받으며 프로젝트를 진행했습니다."
+  },
+  {
+    "type": "수상",
+    "title": "JAVA Festival 2등 · 장려상 · 모범상",
+    "org": "스마트인재개발원",
+    "period": "2025",
+    "description": "팀 내 JAVA Festival 2등, 실전융합 프로젝트 장려상, 우수한 출석 태도로 모범상을 받았습니다."
+  },
+  {
+    "type": "경력",
+    "title": "요식업 매장 실장",
+    "org": "요쿠야 · 카이치",
+    "period": "2023.06 – 2024.10",
+    "description": "매장 운영 총괄, 직원 관리, 고객 응대를 맡았습니다. 이 경험은 개발 프로젝트에서 커뮤니케이션과 문제 해결의 기반이 되었습니다."
+  },
+  {
+    "type": "학력",
+    "title": "경영학부 졸업",
+    "org": "원광대학교",
+    "period": "2017.03 – 2023.02",
+    "description": "부학생회장으로 활동하며 경영대학장 공로상(2023)을 받았고, 경제·금융 동아리에서 숫자 기반 사고를 길렀습니다."
+  }
+]
