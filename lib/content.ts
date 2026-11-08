@@ -15,6 +15,7 @@ export type Profile = {
   story: { title: string; body: string };
   strength: string;
   hobbies: string[];
+  prosCons: { strengths: string[]; weaknesses: string[] };
   stats: { label: string; value: number; suffix: string }[];
   values: { title: string; body: string }[];
   links: { github: string; email: string; linkedin: string };
