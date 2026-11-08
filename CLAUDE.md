@@ -114,7 +114,7 @@ public/         정적 자산
 # 프론트 (.env.local)
 GITHUB_TOKEN=
 GITHUB_USERNAME=
-NEXT_PUBLIC_API_URL=http://localhost:8080
+NEXT_PUBLIC_CHAT_API_URL=http://localhost:8080
 
 # 서버 (환경변수 또는 server/.env, 커밋 금지)
 LLM_PROVIDER=gemini

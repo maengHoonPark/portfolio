@@ -1,7 +1,7 @@
 export type ChatRole = "user" | "assistant";
 export type ChatMessage = { role: ChatRole; content: string };
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
+export const API_URL = process.env.NEXT_PUBLIC_CHAT_API_URL ?? "http://localhost:8080";
 
 /** 사이트 어디서든 챗봇을 열 때 쓰는 이벤트 이름 */
 export const OPEN_CHAT_EVENT = "portfolio:open-chat";

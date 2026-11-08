@@ -41,11 +41,11 @@ cd server
 
 | 대상     | 서비스                | 설정                                                                                     |
 | -------- | --------------------- | ---------------------------------------------------------------------------------------- |
-| 사이트   | Vercel                | 레포 연결 → 환경변수 `NEXT_PUBLIC_API_URL` = Render 주소                                 |
+| 사이트   | Vercel                | 레포 연결 → 환경변수 `NEXT_PUBLIC_CHAT_API_URL` = Render 주소                            |
 | 챗봇 API | Render (무료, Docker) | 루트의 [`render.yaml`](render.yaml) Blueprint → `GEMINI_API_KEY`, `ALLOWED_ORIGINS` 입력 |
 
 1. Render에서 챗봇 API를 먼저 띄우고 주소(`https://portfolio-chat-xxxx.onrender.com`)를 확인한다.
-2. Vercel에 `NEXT_PUBLIC_API_URL`을 그 주소로 넣고 배포한다.
+2. Vercel에 `NEXT_PUBLIC_CHAT_API_URL`을 그 주소로 넣고 배포한다. 타입은 **Config**로 둔다 (Secret이면 `NEXT_PUBLIC_` 변수를 저장할 수 없다).
 3. Render의 `ALLOWED_ORIGINS`에 Vercel 주소를 넣고 재배포한다 (CORS).
 
 Render 무료 플랜은 15분간 요청이 없으면 잠들어 첫 응답이 30초~1분 걸린다. 사이트는 챗봇을 열 때 서버를 미리 깨우고, 늦어지면 안내 문구를 보여준다.
