@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 박명훈 포트폴리오
 
-## Getting Started
+Java 백엔드 개발자 박명훈의 포트폴리오 사이트와 "박명훈에게 물어보세요" AI 챗봇 서버입니다.
 
-First, run the development server:
+## 구성
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+| 영역 | 기술 | 위치 |
+|---|---|---|
+| 사이트 | Next.js 16 (App Router) · TypeScript · Tailwind CSS v4 · Motion | `app/`, `components/` |
+| 챗봇 API | Spring Boot 4 · Java 21 · Gradle · Docker | [`server/`](server/README.md) |
+| 콘텐츠 | 프로필·프로젝트·경력 JSON (사이트와 챗봇이 함께 사용) | `content/` |
+
+```
+브라우저 ──▶ 사이트 (Next.js, 정적 생성)
+   └──────▶ 챗봇 API (Spring Boot, SSE 스트리밍) ──▶ Gemini API
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 주요 기능
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 토스 스타일 UI: 스크롤 등장, 숫자 카운트업, 롤링 텍스트, 바텀시트, 토스트
+- 다크/라이트 모드 (깜빡임 없는 초기 적용, View Transitions 전환 효과)
+- AI 챗봇: 포트폴리오 내용만 근거로 답변, 레이트 리밋, 프롬프트 인젝션 완화
+- `prefers-reduced-motion` 존중, 키보드 접근성
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+챗봇 서버의 설계 의도와 테스트는 [server/README.md](server/README.md)에 정리했습니다.
 
-## Learn More
+## 실행
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+pnpm install
+pnpm dev                 # http://localhost:3000
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+cd server
+./gradlew bootRun        # http://localhost:8080 (GEMINI_API_KEY 없으면 데모 모드)
+./gradlew test
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+환경변수는 [.env.example](.env.example)을 참고하세요.
