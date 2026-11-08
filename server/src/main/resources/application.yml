@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: portfolio-chat
+  threads:
+    virtual:
+      enabled: true
+
+server:
+  port: ${PORT:8080}
+  shutdown: graceful
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+chat:
+  # 쉼표로 여러 도메인 지정 (예: https://myeonghun.dev,http://localhost:3000)
+  allowed-origins: ${ALLOWED_ORIGINS:http://localhost:3000}
+  # LLM에 넘길 최근 대화 수
+  max-history: 12
+  # 리버스 프록시(Render 등) 뒤에서만 true. 직접 노출 시 X-Forwarded-For는 위조 가능
+  trust-forwarded-for: ${TRUST_FORWARDED_FOR:false}
+  rate-limit:
+    capacity: 10
+    refill-per-minute: 10
+
+llm:
+  provider: ${LLM_PROVIDER:gemini}
+  timeout: 30s
+  max-retries: 2
+  retry-backoff: 500ms
+  gemini:
+    api-key: ${GEMINI_API_KEY:}
+    model: ${GEMINI_MODEL:gemini-2.5-flash}
+    base-url: https://generativelanguage.googleapis.com
