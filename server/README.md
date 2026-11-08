@@ -13,7 +13,7 @@ GEMINI_API_KEY=... ./gradlew bootRun   # http://localhost:8080
 | 환경변수              | 기본값                  | 설명                          |
 | --------------------- | ----------------------- | ----------------------------- |
 | `GEMINI_API_KEY`      | (없음)                  | 없으면 데모 응답만 스트리밍   |
-| `GEMINI_MODEL`        | `gemini-2.5-flash`      | 사용할 Gemini 모델            |
+| `GEMINI_MODEL`        | `gemini-3.5-flash-lite` | 사용할 Gemini 모델            |
 | `LLM_PROVIDER`        | `gemini`                | `gemini` 또는 `fake`          |
 | `ALLOWED_ORIGINS`     | `http://localhost:3000` | CORS 허용 도메인 (쉼표 구분)  |
 | `TRUST_FORWARDED_FOR` | `false`                 | 리버스 프록시 뒤에서만 `true` |

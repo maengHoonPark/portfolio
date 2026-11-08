@@ -1,0 +1,22 @@
+# Render Blueprint — 챗봇 API(Spring Boot)를 Docker로 배포한다.
+# Render 대시보드 → New → Blueprint → 이 레포 선택 → 비밀 값(sync: false)만 입력하면 된다.
+services:
+  - type: web
+    name: portfolio-chat
+    runtime: docker
+    plan: free
+    # content/ 를 지식원으로 함께 넣어야 하므로 빌드 컨텍스트는 레포 루트
+    dockerfilePath: ./server/Dockerfile
+    dockerContext: .
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-3.5-flash-lite
+      # Vercel 배포 주소 (예: https://portfolio-xxx.vercel.app). 여러 개면 쉼표로 구분
+      - key: ALLOWED_ORIGINS
+        sync: false
+      # Render는 프록시 뒤에서 동작하므로 X-Forwarded-For 로 실제 IP를 얻는다
+      - key: TRUST_FORWARDED_FOR
+        value: "true"

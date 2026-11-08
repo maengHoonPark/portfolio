@@ -1,6 +1,9 @@
 spring:
   application:
     name: portfolio-chat
+  config:
+    # 로컬 개발용: server/.env 에 GEMINI_API_KEY=... 를 적어 두면 읽는다 (파일은 커밋하지 않는다)
+    import: optional:file:.env[.properties]
   threads:
     virtual:
       enabled: true
@@ -33,5 +36,5 @@ llm:
   retry-backoff: 500ms
   gemini:
     api-key: ${GEMINI_API_KEY:}
-    model: ${GEMINI_MODEL:gemini-2.5-flash}
+    model: ${GEMINI_MODEL:gemini-3.5-flash-lite}
     base-url: https://generativelanguage.googleapis.com
