@@ -11,6 +11,12 @@ services:
     dockerfilePath: ./server/Dockerfile
     dockerContext: .
     healthCheckPath: /actuator/health
+    # 챗봇 서버에 영향을 주는 파일이 바뀔 때만 다시 빌드한다 (사이트만 바뀌면 건너뜀)
+    buildFilter:
+      paths:
+        - server/**
+        - content/**
+        - render.yaml
     envVars:
       - key: GEMINI_API_KEY
         sync: false
