@@ -15,14 +15,24 @@ export function TechStack() {
               <h3 className="text-sm font-semibold text-weak">{g.name}</h3>
               {g.items.length > 0 ? (
                 <ul className="mt-4 flex flex-wrap gap-2">
-                  {g.items.map((item) => (
-                    <li
-                      key={item}
-                      className="rounded-full bg-bg-sub px-3.5 py-1.5 text-sm font-semibold text-strong"
-                    >
-                      {item}
-                    </li>
-                  ))}
+                  {g.items.map((item) =>
+                    item === g.main ? (
+                      <li
+                        key={item}
+                        className="inline-flex items-center gap-1.5 rounded-full bg-blue-500 px-3.5 py-1.5 text-sm font-bold text-white"
+                      >
+                        {item}
+                        <span className="rounded-full bg-white/25 px-1.5 text-[11px]">주력</span>
+                      </li>
+                    ) : (
+                      <li
+                        key={item}
+                        className="rounded-full bg-bg-sub px-3.5 py-1.5 text-sm font-semibold text-strong"
+                      >
+                        {item}
+                      </li>
+                    ),
+                  )}
                 </ul>
               ) : (
                 <p className="mt-4">
@@ -34,7 +44,7 @@ export function TechStack() {
         ))}
       </div>
       <Reveal className="mt-10">
-        <Marquee items={skills.flatMap((g) => g.items)} />
+        <Marquee items={skills.filter((g) => g.name !== "Certificate").flatMap((g) => g.items)} />
       </Reveal>
     </Section>
   );

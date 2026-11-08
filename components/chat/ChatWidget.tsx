@@ -3,7 +3,12 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from "react";
 import chat from "@/content/chat.json";
-import { MAX_QUESTION_LENGTH, OPEN_CHAT_EVENT, wakeServer } from "@/lib/chat-client";
+import {
+  MAX_QUESTION_LENGTH,
+  OPEN_CHAT_EVENT,
+  wakeServer,
+  type OpenChatDetail,
+} from "@/lib/chat-client";
 import { useChat } from "./useChat";
 import { MessageList } from "./MessageList";
 
@@ -28,10 +33,27 @@ export function ChatWidget() {
     stop();
   }, [stop]);
 
+  // 이벤트 리스너가 항상 최신 submit을 부르도록 ref에 담아 둔다
+  const submitRef = useRef<(text: string) => Promise<void>>(async () => {});
+
   useEffect(() => {
-    window.addEventListener(OPEN_CHAT_EVENT, openChat);
-    return () => window.removeEventListener(OPEN_CHAT_EVENT, openChat);
+    const onOpen = (e: Event) => {
+      openChat();
+      const question = (e as CustomEvent<OpenChatDetail>).detail?.question;
+      if (question) void submitRef.current(question);
+    };
+    window.addEventListener(OPEN_CHAT_EVENT, onOpen);
+    return () => window.removeEventListener(OPEN_CHAT_EVENT, onOpen);
   }, [openChat]);
+
+  // 처음 들어오면 버튼 옆에 "물어보세요" 말풍선을 띄워 챗봇이 있다는 걸 알린다
+  const [teaser, setTeaser] = useState(false);
+  const [teaserDismissed, setTeaserDismissed] = useState(false);
+  useEffect(() => {
+    const id = setTimeout(() => setTeaser(true), 1500);
+    return () => clearTimeout(id);
+  }, []);
+  const showTeaser = teaser && !teaserDismissed && !open;
 
   useEffect(() => {
     if (!open) return;
@@ -49,6 +71,10 @@ export function ChatWidget() {
     inputRef.current?.focus();
   };
 
+  useEffect(() => {
+    submitRef.current = submit;
+  });
+
   const onKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     // 한글 조합 중 Enter는 글자 확정이므로 전송하지 않는다
     if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
@@ -59,6 +85,38 @@ export function ChatWidget() {
 
   return (
     <>
+      <AnimatePresence>
+        {showTeaser && (
+          <motion.div
+            className="fixed bottom-24 right-6 z-40 flex max-w-[260px] items-start gap-2 rounded-card rounded-br-md border border-line bg-surface p-4 text-sm text-strong shadow-xl"
+            initial={{ opacity: 0, y: 12, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 8, scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 420, damping: 30 }}
+          >
+            <button type="button" onClick={openChat} className="text-left">
+              <span className="block font-bold">{chat.teaser.title}</span>
+              <span className="mt-1 block text-body">{chat.teaser.body}</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setTeaserDismissed(true)}
+              aria-label="안내 닫기"
+              className="-mr-1 -mt-1 shrink-0 rounded-full p-1 text-weak hover:text-strong"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
+                <path
+                  d="M6 6l12 12M18 6L6 18"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>
         {!open && (
           <motion.button

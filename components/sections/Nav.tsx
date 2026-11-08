@@ -1,11 +1,13 @@
 "use client";
 
 import { motion, useMotionValueEvent, useScroll, useSpring } from "motion/react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
+import { useActiveSection } from "@/components/hooks/useActiveSection";
 import { BottomSheet } from "@/components/ui/BottomSheet";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 const links = [
+  { id: "ask", label: "AI Chat" },
   { id: "about", label: "About" },
   { id: "projects", label: "Projects" },
   { id: "skills", label: "Tech" },
@@ -14,28 +16,13 @@ const links = [
 ];
 
 export function Nav({ name }: { name: string }) {
-  const [active, setActive] = useState("");
+  const active = useActiveSection(links.map((l) => l.id));
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { scrollY, scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 200, damping: 30, restDelta: 0.001 });
 
   useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 8));
-
-  // 화면 중앙에 걸친 섹션을 현재 위치로 표시한다 (scroll spy)
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) if (entry.isIntersecting) setActive(entry.target.id);
-      },
-      { rootMargin: "-45% 0px -50% 0px" },
-    );
-    for (const { id } of links) {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    }
-    return () => observer.disconnect();
-  }, []);
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
@@ -50,12 +37,12 @@ export function Nav({ name }: { name: string }) {
           aria-label="주요 메뉴"
           className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6"
         >
-          <a href="#top" className="font-bold text-strong">
+          <a href="#top" className="shrink-0 whitespace-nowrap font-bold text-strong">
             {name}
           </a>
 
           <div className="flex items-center gap-1">
-            <ul className="hidden items-center gap-1 text-sm font-medium sm:flex">
+            <ul className="hidden items-center gap-1 text-sm font-medium md:flex">
               {links.map((l) => {
                 const isActive = active === l.id;
                 return (
@@ -63,7 +50,7 @@ export function Nav({ name }: { name: string }) {
                     <a
                       href={`#${l.id}`}
                       aria-current={isActive ? "location" : undefined}
-                      className={`relative block rounded-full px-3.5 py-2 transition-colors ${
+                      className={`relative block whitespace-nowrap rounded-full px-3.5 py-2 transition-colors ${
                         isActive ? "text-strong" : "text-body hover:text-strong"
                       }`}
                     >
@@ -88,7 +75,7 @@ export function Nav({ name }: { name: string }) {
               onClick={() => setMenuOpen(true)}
               aria-label="메뉴 열기"
               aria-expanded={menuOpen}
-              className="-mr-2 rounded-button p-2 text-strong sm:hidden"
+              className="-mr-2 rounded-button p-2 text-strong md:hidden"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
                 <path
@@ -129,6 +116,10 @@ export function Nav({ name }: { name: string }) {
             </li>
           ))}
         </ul>
+        <div className="mt-3 flex items-center justify-between border-t border-line px-3 pt-5">
+          <span className="text-lg font-semibold text-strong">화면 테마</span>
+          <ThemeToggle />
+        </div>
       </BottomSheet>
     </>
   );

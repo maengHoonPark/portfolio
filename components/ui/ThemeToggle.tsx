@@ -68,33 +68,54 @@ export function ThemeToggle() {
     });
   };
 
+  const isDark = theme === "dark";
+
+  // 아이콘만 있으면 무엇인지 알기 어려워, 글자 라벨 + 켜고 끄는 스위치 모양으로 보여준다
   return (
     <button
       type="button"
+      role="switch"
+      aria-checked={isDark}
+      aria-label="다크 모드"
       onClick={toggle}
-      aria-label={theme ? `${next === "dark" ? "다크" : "라이트"} 모드로 바꾸기` : "테마 바꾸기"}
-      className="relative grid h-10 w-10 place-items-center overflow-hidden rounded-full text-strong transition-colors hover:bg-bg-sub"
+      className="flex items-center gap-2 rounded-full border border-line bg-surface py-1 pl-1 pr-1 text-sm font-semibold text-strong transition-colors hover:border-blue-500 sm:pl-3.5"
     >
-      <AnimatePresence mode="wait" initial={false}>
-        {theme && (
-          <motion.span
-            key={theme}
-            initial={{ y: 16, rotate: -90, opacity: 0 }}
-            animate={{ y: 0, rotate: 0, opacity: 1 }}
-            exit={{ y: -16, rotate: 90, opacity: 0 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {theme === "dark" ? <MoonIcon /> : <SunIcon />}
-          </motion.span>
-        )}
-      </AnimatePresence>
+      <span className="hidden whitespace-nowrap sm:inline">
+        {theme ? (isDark ? "다크 모드" : "라이트 모드") : "테마"}
+      </span>
+      <span
+        className={`relative flex h-7 w-12 shrink-0 items-center rounded-full transition-colors duration-300 ${
+          isDark ? "bg-blue-500" : "bg-bg-sub"
+        }`}
+      >
+        <motion.span
+          className="absolute left-0.5 grid h-6 w-6 place-items-center rounded-full bg-white text-blue-500 shadow-sm"
+          initial={false}
+          animate={{ x: isDark ? 20 : 0 }}
+          transition={{ type: "spring", stiffness: 500, damping: 32 }}
+        >
+          <AnimatePresence mode="wait" initial={false}>
+            {theme && (
+              <motion.span
+                key={theme}
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                {isDark ? <MoonIcon /> : <SunIcon />}
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </motion.span>
+      </span>
     </button>
   );
 }
 
 function SunIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
       <circle cx="12" cy="12" r="4.5" fill="currentColor" />
       <path
         d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"
@@ -108,7 +129,7 @@ function SunIcon() {
 
 function MoonIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
       <path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7Z" fill="currentColor" />
     </svg>
   );

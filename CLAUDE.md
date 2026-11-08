@@ -42,7 +42,9 @@ pnpm format         # Prettier
 app/            라우트, 레이아웃 (api/chat은 Spring Boot 완성 전 임시용)
 server/         Spring Boot 챗봇 API (controller / service / llm / config, 테스트, Dockerfile)
 components/ui/        재사용 UI 프리미티브 (Button, Card, Toast, BottomSheet ...)
-components/sections/  페이지 섹션 (Hero, About, Projects ...)
+components/sections/  페이지 섹션 (Intro, DeepDive, TechStack ...)
+components/story/     스크롤 연출 섹션 (HeroScroll, WordReveal, ProjectStory, SectionRail)
+components/motion/    재사용 모션 프리미티브 (Reveal, CountUp, Marquee ...)
 components/chat/      챗봇 UI
 content/        프로필·프로젝트·경력 데이터 (사이트와 챗봇이 공유)
 lib/            github.ts, llm/, content.ts 등 비 UI 로직

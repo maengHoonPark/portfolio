@@ -6,6 +6,13 @@ export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080
 /** 사이트 어디서든 챗봇을 열 때 쓰는 이벤트 이름 */
 export const OPEN_CHAT_EVENT = "portfolio:open-chat";
 
+export type OpenChatDetail = { question?: string };
+
+/** 사이트 어디서든 챗봇을 연다. question을 주면 열자마자 그 질문을 보낸다. */
+export function openChat(question?: string) {
+  window.dispatchEvent(new CustomEvent<OpenChatDetail>(OPEN_CHAT_EVENT, { detail: { question } }));
+}
+
 /** 서버 ChatService.MAX_QUESTION_LENGTH 와 맞춘다 */
 export const MAX_QUESTION_LENGTH = 500;
 
