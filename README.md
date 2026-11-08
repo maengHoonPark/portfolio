@@ -39,9 +39,9 @@ cd server
 
 ## 배포
 
-| 대상 | 서비스 | 설정 |
-|---|---|---|
-| 사이트 | Vercel | 레포 연결 → 환경변수 `NEXT_PUBLIC_API_URL` = Render 주소 |
+| 대상     | 서비스                | 설정                                                                                     |
+| -------- | --------------------- | ---------------------------------------------------------------------------------------- |
+| 사이트   | Vercel                | 레포 연결 → 환경변수 `NEXT_PUBLIC_API_URL` = Render 주소                                 |
 | 챗봇 API | Render (무료, Docker) | 루트의 [`render.yaml`](render.yaml) Blueprint → `GEMINI_API_KEY`, `ALLOWED_ORIGINS` 입력 |
 
 1. Render에서 챗봇 API를 먼저 띄우고 주소(`https://portfolio-chat-xxxx.onrender.com`)를 확인한다.
