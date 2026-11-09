@@ -44,12 +44,14 @@
     "metrics": [],
     "links": [
       {
-        "label": "Electerior",
-        "url": "https://github.com/maengHoonPark/electerior"
+        "label": "Electerior 사이트",
+        "url": "https://electerior.com/",
+        "kind": "live"
       },
       {
-        "label": "SaferRoad",
-        "url": "https://github.com/maengHoonPark/saferroad"
+        "label": "SaferRoad 사이트",
+        "url": "https://saferroad.co.kr/",
+        "kind": "live"
       }
     ],
     "visual": {
@@ -58,15 +60,20 @@
         {
           "src": "/images/electerior.png",
           "alt": "Electerior 회사 홈페이지 첫 화면",
-          "label": "electerior.com"
+          "label": "electerior.com",
+          "width": 1440,
+          "height": 1000
         },
         {
           "src": "/images/saferroad.png",
           "alt": "SaferRoad 서비스 홈페이지 첫 화면",
-          "label": "saferroad.co.kr"
+          "label": "saferroad.co.kr",
+          "width": 1440,
+          "height": 1000
         }
       ]
-    }
+    },
+    "note": "전 직장 보안 정책상 소스 코드는 공개하지 않아요. 결과물은 실제 운영 중인 서비스에서 확인할 수 있어요."
   },
   {
     "slug": "jobis",
@@ -79,13 +86,20 @@
     "links": [
       {
         "label": "GitHub",
-        "url": "https://github.com/maengHoonPark/JOBIS"
+        "url": "https://github.com/maengHoonPark/JOBIS",
+        "kind": "github"
+      },
+      {
+        "label": "YouTube에서 보기",
+        "url": "https://www.youtube.com/watch?v=5hazrcHVnf8",
+        "kind": "video"
       }
     ],
     "visual": {
-      "type": "image",
-      "src": "/images/jobis.png",
-      "alt": "J.O.B.I.S AI 면접 화면"
+      "type": "video",
+      "youtubeId": "5hazrcHVnf8",
+      "title": "J.O.B.I.S 시연 영상",
+      "poster": "/images/jobis.png"
     }
   },
   {
@@ -99,13 +113,16 @@
     "links": [
       {
         "label": "GitHub",
-        "url": "https://github.com/maengHoonPark/CEnter"
+        "url": "https://github.com/maengHoonPark/CEnter",
+        "kind": "github"
       }
     ],
     "visual": {
       "type": "image",
       "src": "/images/center.png",
-      "alt": "CEnter 코딩 문제 풀이 화면"
+      "alt": "CEnter 코딩 문제 풀이 화면",
+      "width": 796,
+      "height": 427
     }
   }
 ]
