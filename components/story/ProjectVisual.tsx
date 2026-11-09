@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { ProjectVisual as Visual, Screenshot as Shot } from "@/lib/content";
+import { Gallery } from "./Gallery";
 import { YouTubeEmbed } from "./YouTubeEmbed";
 
 /**
@@ -43,6 +44,8 @@ export function ProjectVisual({
           ))}
         </div>
       );
+    case "gallery":
+      return <Gallery images={visual.images} fill={layout === "fill"} />;
     case "architecture":
       return <ArchitectureDiagram fill={layout === "fill"} />;
   }

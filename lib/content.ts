@@ -40,6 +40,8 @@ export type Project = {
   visual?: ProjectVisual;
   /** 그리드에서 넓게 보여줄 대표 프로젝트 */
   featured?: boolean;
+  /** 아직 개발 중인 프로젝트 ("진행 중" 배지 표시) */
+  inProgress?: boolean;
   draft?: boolean;
 };
 
@@ -53,7 +55,8 @@ export type ProjectVisual =
   | { type: "architecture" }
   | ({ type: "image" } & Screenshot)
   | { type: "duo"; images: (Screenshot & { label: string })[] }
-  | { type: "video"; youtubeId: string; title: string; poster: string };
+  | { type: "video"; youtubeId: string; title: string; poster: string }
+  | { type: "gallery"; images: (Screenshot & { label: string })[] };
 
 /** main: 가장 자신 있는 항목 (주력 표시) */
 export type SkillGroup = { name: string; items: string[]; main?: string };

@@ -35,6 +35,87 @@
     }
   },
   {
+    "slug": "ticklock",
+    "title": "TickLock · 실시간 시세 자동 체결 엔진",
+    "inProgress": true,
+    "summary": "가상 주식 시세가 초당 1,000건 이상 들어오는 동안, 사용자가 걸어 둔 조건 주문(예: 70,000원 이하가 되면 매수)을 자동으로 체결하는 백엔드입니다. 같은 지갑으로 주문이 동시에 몰려도 잔액이 1원도 어긋나지 않고, 같은 이벤트가 여러 번 와도 체결은 정확히 한 번만 되게 만드는 것이 핵심입니다. 락 없는 버전을 먼저 만들어 문제를 재현하고, 고친 뒤 숫자로 비교했습니다.",
+    "highlights": [
+      "동시성: 지갑 단위 Redisson 분산 락으로 같은 지갑의 체결만 줄 세우고, 다른 사용자의 체결은 병렬로 처리합니다. 락 획득 → 트랜잭션 시작 → 커밋 → 락 해제 순서를 지키려고 트랜잭션을 별도 빈으로 분리했습니다.",
+      "멱등성 3중 방어: 조건부 UPDATE(WHERE status=ACTIVE)로 주문을 선점하고, executions.trigger_order_id UNIQUE와 주문 등록 (user_id, request_key) UNIQUE로 중복 체결·중복 등록을 DB가 막습니다.",
+      "최후 방어선: 금액은 원 단위 BIGINT로 소수 오차를 없애고, CHECK(balance >= 0)로 락이 실패해도 잔액이 음수가 되지 않게 했습니다.",
+      "재현 → 해결: k6로 같은 지갑 주문 100건을 동시에 체결하면, 락 없는 버전은 43건이 체결되고(정답 13건) 잔액이 214,603,500원 어긋났습니다. 락 + 조건부 UPDATE 버전은 13건 체결, 오차 0원입니다.",
+      "시세 파이프라인: Redis Pub/Sub + 메모리 캐시 + 1초 배치 INSERT. 틱마다 INSERT하던 방식(초당 636건 처리, 평균 지연 약 9.8초)을 배치로 바꿔 초당 1,001건을 평균 지연 17ms로 처리하고, PostgreSQL CPU는 13.7%에서 1.5%로 줄었습니다.",
+      "측정하며 찾은 문제: Redis 메시지 0.45%가 순서가 뒤바뀌어 도착해 처리 스레드를 1개로 고정해 0건으로 만들었고, 벤치 스크립트가 경과 시간을 잘못 계산해 수치가 약 1.8배 부풀려진 버그도 찾아 고쳤습니다.",
+      "테스트: 실제 PostgreSQL·Redis에 붙인 JUnit 동시성 테스트(50건 동시 매수 시 잔액 정확, 같은 주문 20번 동시 체결 시 1번만 체결, 보유 수량 초과 동시 매도 차단).",
+      "관찰 화면: 체결 기록으로 다시 계산한 잔액과 실제 잔액을 비교하는 정합성 검사, 테이블별 행 수, 시세 파이프라인 지표(발행·처리·밀린 양·유실·순서 역전)를 2초마다 보여주는 개발용 화면을 만들었습니다."
+    ],
+    "role": "개인 프로젝트 · 백엔드 설계·구현, 프론트엔드",
+    "period": "2026.11 – 진행 중",
+    "stack": [
+      "Java 17",
+      "Spring Boot 3",
+      "JPA",
+      "PostgreSQL",
+      "Redis",
+      "Redisson",
+      "Flyway",
+      "k6",
+      "Docker Compose",
+      "Next.js"
+    ],
+    "metrics": [
+      {
+        "label": "동시 주문 100건 잔액 오차",
+        "value": "2억 1,460만 원 → 0원"
+      },
+      {
+        "label": "시세 처리 평균 지연",
+        "value": "9,772ms → 17ms"
+      }
+    ],
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/maengHoonPark/TickLock",
+        "kind": "github"
+      }
+    ],
+    "note": "개발 중인 프로젝트예요. 체결 엔진, 동시성 테스트, 시세 저장 성능 측정까지 마쳤고 배포와 문서 정리를 진행하고 있어요.",
+    "visual": {
+      "type": "gallery",
+      "images": [
+        {
+          "src": "/images/ticklock-home.png",
+          "alt": "TickLock 홈 화면. 주문 가능 금액과 종목별 실시간 시세·스파크라인",
+          "label": "시세",
+          "width": 1640,
+          "height": 1720
+        },
+        {
+          "src": "/images/ticklock-detail.png",
+          "alt": "삼성전자 상세 화면. 실시간 가격 차트와 이 종목의 조건 주문 목록",
+          "label": "종목 상세",
+          "width": 1640,
+          "height": 2200
+        },
+        {
+          "src": "/images/ticklock-order.png",
+          "alt": "조건 주문 등록 창. 매수·매도, 목표가 이하·이상, 목표 가격과 수량 입력",
+          "label": "조건 주문",
+          "width": 1640,
+          "height": 1720
+        },
+        {
+          "src": "/images/ticklock-debug.png",
+          "alt": "개발용 관찰 화면. 잔액 정합성 검사, 테이블별 행 수, 시세 파이프라인 지표",
+          "label": "관찰 화면",
+          "width": 1640,
+          "height": 2480
+        }
+      ]
+    }
+  },
+  {
     "slug": "electerior-saferroad",
     "title": "Electerior · SaferRoad",
     "summary": "레피소드에서 회사 공식 홈페이지(Electerior)와 공사 현장 관리 플랫폼(SaferRoad)을 개발했습니다. 회원가입, 로그인, OAuth 등 인증/인가를 직접 설계·구현하고, Prisma로 User·Role·WorkSite 관계를 모델링해 CRUD API를 만들었습니다. FastAPI + LangChain + Chroma 기반 사내 챗봇 개발도 보조했습니다.",
