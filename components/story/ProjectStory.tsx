@@ -8,7 +8,7 @@ import {
   useScroll,
 } from "motion/react";
 import { useRef, useState } from "react";
-import type { Project } from "@/lib/content";
+import type { Project, ProjectLink } from "@/lib/content";
 import { easeOut, Reveal } from "@/components/motion/Reveal";
 import { ProjectVisual } from "./ProjectVisual";
 
@@ -140,9 +140,11 @@ function ProjectText({
               href={l.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-button bg-strong px-4 py-2.5 text-sm font-semibold text-bg transition-transform active:scale-[0.97]"
+              className={`inline-flex items-center gap-2 rounded-button px-4 py-2.5 text-sm font-semibold transition-transform active:scale-[0.97] ${
+                l.kind === "live" ? "bg-blue-500 text-white" : "bg-strong text-bg"
+              }`}
             >
-              <GitHubIcon />
+              <LinkIcon kind={l.kind} />
               {l.label}
             </a>
           ))}
@@ -167,8 +169,9 @@ function StackedList({ projects }: { projects: Project[] }) {
       {projects.map((p, i) => (
         <li key={p.slug}>
           <Reveal>
-            <div className="relative aspect-[6/5] overflow-hidden rounded-hero bg-bg-sub">
-              <ProjectVisual visual={p.visual} />
+            {/* 모바일에서는 고정 비율 박스를 쓰지 않아 구조도·스크린샷이 잘리지 않는다 */}
+            <div className="relative overflow-hidden rounded-hero bg-bg-sub">
+              <ProjectVisual visual={p.visual} layout="flow" />
             </div>
           </Reveal>
           <Reveal delay={0.1} className="mt-6">
@@ -178,6 +181,31 @@ function StackedList({ projects }: { projects: Project[] }) {
       ))}
     </ul>
   );
+}
+
+function LinkIcon({ kind }: { kind: ProjectLink["kind"] }) {
+  if (kind === "live") {
+    // 새 창으로 열리는 실제 서비스
+    return (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+        <path
+          d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    );
+  }
+  if (kind === "video") {
+    return (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+        <path d="M8 5.5v13a1 1 0 0 0 1.53.85l10.4-6.5a1 1 0 0 0 0-1.7L9.53 4.65A1 1 0 0 0 8 5.5Z" />
+      </svg>
+    );
+  }
+  return <GitHubIcon />;
 }
 
 function GitHubIcon() {

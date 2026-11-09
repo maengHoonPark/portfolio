@@ -29,7 +29,7 @@ export type Project = {
   period: string;
   stack: string[];
   metrics: { label: string; value: string }[];
-  links: { label: string; url: string }[];
+  links: ProjectLink[];
   /** 링크가 없는 이유 등 짧은 안내 */
   note?: string;
   /** 핵심 내용 목록 (대표 프로젝트용) */
@@ -43,10 +43,17 @@ export type Project = {
   draft?: boolean;
 };
 
+/** github: 소스 코드, live: 실제 운영 중인 서비스, video: 시연 영상 */
+export type ProjectLink = { label: string; url: string; kind: "github" | "live" | "video" };
+
+/** width·height는 원본 이미지 크기. 프레임 비율을 맞춰 이미지가 잘리지 않게 한다. */
+export type Screenshot = { src: string; alt: string; width: number; height: number };
+
 export type ProjectVisual =
   | { type: "architecture" }
-  | { type: "image"; src: string; alt: string }
-  | { type: "duo"; images: { src: string; alt: string; label: string }[] };
+  | ({ type: "image" } & Screenshot)
+  | { type: "duo"; images: (Screenshot & { label: string })[] }
+  | { type: "video"; youtubeId: string; title: string; poster: string };
 
 /** main: 가장 자신 있는 항목 (주력 표시) */
 export type SkillGroup = { name: string; items: string[]; main?: string };
